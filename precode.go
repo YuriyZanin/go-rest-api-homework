@@ -67,6 +67,7 @@ func postTask(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	defer r.Body.Close()
 
 	if err = json.Unmarshal(buf.Bytes(), &newTask); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
